@@ -19,31 +19,24 @@
 
 // Wait for the deviceready event before using any of Cordova's device APIs.
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
-document.addEventListener('deviceready', onDeviceReady, false);
+document.addEventListener('init', function(event) {
+  var page = event.target;
 
-function onDeviceReady() {
-    // Cordova is now initialized. Have fun!
+  // Manejar la lógica específica de la inicialización de las páginas aquí
+  if (page.id === 'homePage') {
+    // Código para la página de inicio
+  } else if (page.id === 'anotherPage') {
+    // Código para otra página
+  }
+});
 
-    console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
-    document.getElementById('deviceready').classList.add('ready');
+// Función para cambiar de página
+function pushPage(page) {
+  document.querySelector('#myNavigator').pushPage(page);
 }
 
-document.addEventListener('init', function(event) {
-
-    var page = event.target;
-  
-    if (page.id === 'page1') {
-      page.querySelector('#push-button').onclick = function() {
-        console.log("Click en el boton!!! con paso de parámetros..");
-        document.querySelector('#myNavigator').pushPage('page2.html', 
-        {data: {title: 'Page 2', myData: JSON.stringify({"first":"primer dato"})}});
-      };
-    }
-    else if (page.id === 'page2') {
-      console.log(page.data);
-      page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
-    }
-    else if (page.id === 'page3') {
-      page.querySelector('ons-toolbar .center').innerHTML = page.data.title;
-    }
+// Función para manejar el enrutamiento basado en hashes
+window.addEventListener('hashchange', function() {
+  var page = location.hash.slice(1) + '.html';
+  pushPage(page);
 });
