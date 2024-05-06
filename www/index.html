@@ -1,50 +1,123 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
-    <head>
-        <meta charset="utf-8">
-        <!--
-        Customize this policy to fit your own app's needs. For more guidance, please refer to the docs:
-            https://cordova.apache.org/docs/en/latest/
-        Some notes:
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-        <meta name="color-scheme" content="light dark">
-        <link rel="stylesheet" href="css/index.css">
-        <title>Hello World</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <title>Todo List</title>
+</head>
+
+<body>
+    <ons-navigator swipeable id="myNavigator" page="page1.html"></ons-navigator>
+
+    <template id="page1.html">
+        <ons-page id="page1">
+            <div class="superior">
+                <div class="sup-1"></div>
+                <div class="sup-2"></div>
             </div>
-        </div>
-        <script src="cordova.js"></script>
-        <script src="js/index.js"></script>
-    </body>
+            <img src="img/home.png" alt="" class="image">
+            <div class="container">
+                <h1>Get things done with TODo</h1>
+                <p>Lorem ipsum dolor sit amet,
+                    consectetur adipisicing. Maxime,
+                    tempore! Animi nemo aut atque,
+                    deleniti nihil dolorem repellendus.</p>
+                <ons-button id="push-button">Get Started</ons-button>
+            </div>
+        </ons-page>
+    </template>
+
+    <template id="page2.html">
+        <ons-page id="page2">
+            <div class="superior">
+                <div class="sup-1"></div>
+                <div class="sup-2"></div>
+            </div>
+            <div class="container-page2">
+                <h1>Welcome Onboard!</h1>
+                <p>Let’s help you meet up your task</p>
+                <div style="text-align: center; margin-top: 30px;">
+                    <p>
+                        <ons-input id="username" modifier="underbar" placeholder="Username" float></ons-input>
+                    </p>
+                    <p>
+                        <ons-input id="email" modifier="underbar" type="email" placeholder="Email" float></ons-input>
+                    </p>
+                    <p>
+                        <ons-input id="password" modifier="underbar" type="password" placeholder="Password"
+                            float></ons-input>
+                    </p>
+                    <ons-button id="submit">Sign Up</ons-button>
+                </div>
+                <p>Already have an account ? <a class="signIn">Sign In</a></p>
+            </div>
+        </ons-page>
+    </template>
+
+    <template id="page3.html">
+        <ons-page id="page3">
+            <div class="superior">
+                <div class="sup-1"></div>
+                <div class="sup-2"></div>
+            </div>
+            <div class="container-page3">
+                <h1>Welcome Onboard!</h1>
+                <img src="img/iniciar.svg" alt="" class="image3">
+                <div style="text-align: center; margin-top: 30px;">
+                    <p>
+                        <ons-input id="fieldEmail" modifier="underbar" type="email" placeholder="Email"
+                            float></ons-input>
+                    </p>
+                    <p>
+                        <ons-input id="fieldPassword" modifier="underbar" type="password" placeholder="Password"
+                            float></ons-input>
+                    </p>
+                    <ons-button id="submitSignIn">Sign In</ons-button>
+                </div>
+                <p>Dont have an account ?<a class="signUp"> Sign Up</a></p>
+            </div>
+        </ons-page>
+    </template>
+
+    <template id="page4.html">
+        <ons-page id="page4">
+            <div class="superior">
+                <div class="sup-1"></div>
+                <div class="sup-2"></div>
+            </div>
+            <div class="container-page3">
+                <h1>Welcome Back!</h1>
+                <img src="img/task.svg" alt="" class="image3">
+                <div style="text-align: center; margin-top: 30px;">
+                    <div>
+                        <p>
+                            Fecha <ons-input id="reminder" modifier="underbar" type="date" float></ons-input>
+                        </p>
+                    </div>
+                    <div>
+                        <textarea class="textarea" rows="3" placeholder="Textarea"></textarea>
+                    </div>
+                    <div>
+                        <ons-select id="choose-sel">
+                            <option value="basic">Alta</option>
+                            <option value="material">Baja</option>
+                        </ons-select>
+                    </div>
+                    <ons-button id="submitSignIn">Guardar</ons-button>
+                </div>
+            </div>
+        </ons-page>
+    </template>
+
+    <script src="js/index.js"></script>
+    <link rel="stylesheet" href="css/onsenui-core.min.css">
+    <link rel="stylesheet" href="css/onsen-css-components.min.css">
+    <link rel="stylesheet" href="css/screens/index.css">
+    <script src="js/onsenui.min.js"></script>
+</body>
+
 </html>
