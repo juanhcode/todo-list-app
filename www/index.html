@@ -3,8 +3,6 @@
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
@@ -33,19 +31,87 @@
         </ons-page>
     </template>
 
-
-    <!--
-        <template id="page2.html">
+    <template id="page2.html">
         <ons-page id="page2">
-            <ons-toolbar>
-            <div class="left"><ons-back-button>Page 1</ons-back-button></div>
-            <div class="center"></div>
-            </ons-toolbar>
-
-            <p>This is the second page.</p>
+            <div class="superior">
+                <div class="sup-1"></div>
+                <div class="sup-2"></div>
+            </div>
+            <div class="container-page2">
+                <h1>Welcome Onboard!</h1>
+                <p>Let’s help you meet up your task</p>
+                <div style="text-align: center; margin-top: 30px;">
+                    <p>
+                        <ons-input id="username" modifier="underbar" placeholder="Username" float></ons-input>
+                    </p>
+                    <p>
+                        <ons-input id="email" modifier="underbar" type="email" placeholder="Email" float></ons-input>
+                    </p>
+                    <p>
+                        <ons-input id="password" modifier="underbar" type="password" placeholder="Password"
+                            float></ons-input>
+                    </p>
+                    <ons-button id="submit">Sign Up</ons-button>
+                </div>
+                <p>Already have an account ? <a class="signIn">Sign In</a></p>
+            </div>
         </ons-page>
-        </template>
-        -->
+    </template>
+
+    <template id="page3.html">
+        <ons-page id="page3">
+            <div class="superior">
+                <div class="sup-1"></div>
+                <div class="sup-2"></div>
+            </div>
+            <div class="container-page3">
+                <h1>Welcome Onboard!</h1>
+                <img src="img/iniciar.svg" alt="" class="image3">
+                <div style="text-align: center; margin-top: 30px;">
+                    <p>
+                        <ons-input id="fieldEmail" modifier="underbar" type="email" placeholder="Email"
+                            float></ons-input>
+                    </p>
+                    <p>
+                        <ons-input id="fieldPassword" modifier="underbar" type="password" placeholder="Password"
+                            float></ons-input>
+                    </p>
+                    <ons-button id="submitSignIn">Sign In</ons-button>
+                </div>
+                <p>Dont have an account ?<a class="signUp"> Sign Up</a></p>
+            </div>
+        </ons-page>
+    </template>
+
+    <template id="page4.html">
+        <ons-page id="page4">
+            <div class="superior">
+                <div class="sup-1"></div>
+                <div class="sup-2"></div>
+            </div>
+            <div class="container-page3">
+                <h1>Welcome Back!</h1>
+                <img src="img/task.svg" alt="" class="image3">
+                <div style="text-align: center; margin-top: 30px;">
+                    <div>
+                        <p>
+                            Fecha <ons-input id="reminder" modifier="underbar" type="date" float></ons-input>
+                        </p>
+                    </div>
+                    <div>
+                        <textarea class="textarea" rows="3" placeholder="Textarea"></textarea>
+                    </div>
+                    <div>
+                        <ons-select id="choose-sel">
+                            <option value="basic">Alta</option>
+                            <option value="material">Baja</option>
+                        </ons-select>
+                    </div>
+                    <ons-button id="submitSignIn">Guardar</ons-button>
+                </div>
+            </div>
+        </ons-page>
+    </template>
 
     <script src="js/index.js"></script>
     <link rel="stylesheet" href="css/onsenui-core.min.css">
