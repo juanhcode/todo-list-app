@@ -92,6 +92,9 @@ document.addEventListener('init', function (event) {
     }
    }
    else if (page.id === 'page4') {
-    console.log("Hola");
+    page.querySelector('.pushMyNotes').onclick = () => {
+      document.querySelector('#myNavigator').pushPage('page5.html');
+      console.log("IR");
+    }
    }
 });

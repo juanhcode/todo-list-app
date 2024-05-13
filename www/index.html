@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <ons-navigator swipeable id="myNavigator" page="page1.html"></ons-navigator>
+    <ons-navigator swipeable id="myNavigator" page="page4.html"></ons-navigator>
 
     <template id="page1.html">
         <ons-page id="page1">
@@ -19,14 +19,15 @@
                 <div class="sup-1"></div>
                 <div class="sup-2"></div>
             </div>
-            <img src="img/home.png" alt="" class="image">
+            <div class="container-image">
+                <img src="img/home.png" alt="" class="image">
+            </div>
             <div class="container">
-                <h1>Get things done with TODo</h1>
-                <p>Lorem ipsum dolor sit amet,
-                    consectetur adipisicing. Maxime,
-                    tempore! Animi nemo aut atque,
-                    deleniti nihil dolorem repellendus.</p>
-                <ons-button id="push-button">Get Started</ons-button>
+                <h1>Haga las cosas con TODO</h1>
+                <p>
+                    "Todo" es una app versátil que te permite guardar recordatorios, notas, recibir notificaciones y personalizar colores.
+                </p>
+                <ons-button id="push-button">Empezar</ons-button>
             </div>
         </ons-page>
     </template>
@@ -38,22 +39,22 @@
                 <div class="sup-2"></div>
             </div>
             <div class="container-page2">
-                <h1>Welcome Onboard!</h1>
-                <p>Let’s help you meet up your task</p>
+                <h1>TODO</h1>
+                <p style="text-align: center;">Cada nota es un paso hacia tu meta. Sigue escribiendo, cada palabra cuenta.</p>
                 <div style="text-align: center; margin-top: 30px;">
                     <p>
-                        <ons-input id="username" modifier="underbar" placeholder="Username" float></ons-input>
+                        <ons-input id="username" modifier="underbar" placeholder="Usuario" float></ons-input>
                     </p>
                     <p>
                         <ons-input id="email" modifier="underbar" type="email" placeholder="Email" float></ons-input>
                     </p>
                     <p>
-                        <ons-input id="password" modifier="underbar" type="password" placeholder="Password"
+                        <ons-input id="password" modifier="underbar" type="password" placeholder="Contraseña"
                             float></ons-input>
                     </p>
-                    <ons-button id="submit">Sign Up</ons-button>
+                    <ons-button id="submit">Registrar</ons-button>
                 </div>
-                <p>Already have an account ? <a class="signIn">Sign In</a></p>
+                <p>¿Tienes una cuenta? <a class="signIn">Inicia Sesión</a></p>
             </div>
         </ons-page>
     </template>
@@ -65,7 +66,7 @@
                 <div class="sup-2"></div>
             </div>
             <div class="container-page3">
-                <h1>Welcome Onboard!</h1>
+                <h1>TODO</h1>
                 <img src="img/iniciar.svg" alt="" class="image3">
                 <div style="text-align: center; margin-top: 30px;">
                     <p>
@@ -73,12 +74,12 @@
                             float></ons-input>
                     </p>
                     <p>
-                        <ons-input id="fieldPassword" modifier="underbar" type="password" placeholder="Password"
+                        <ons-input id="fieldPassword" modifier="underbar" type="Contraseña" placeholder="Password"
                             float></ons-input>
                     </p>
-                    <ons-button id="submitSignIn">Sign In</ons-button>
+                    <ons-button id="submitSignIn">Inicia Sesión</ons-button>
                 </div>
-                <p>Dont have an account ?<a class="signUp"> Sign Up</a></p>
+                <p>¿No tienes una cuenta?<a class="signUp">Registrate</a></p>
             </div>
         </ons-page>
     </template>
@@ -89,26 +90,49 @@
                 <div class="sup-1"></div>
                 <div class="sup-2"></div>
             </div>
-            <div class="container-page3">
-                <h1>Welcome Back!</h1>
-                <img src="img/task.svg" alt="" class="image3">
-                <div style="text-align: center; margin-top: 30px;">
-                    <div>
-                        <p>
-                            Fecha <ons-input id="reminder" modifier="underbar" type="date" float></ons-input>
-                        </p>
-                    </div>
-                    <div>
-                        <textarea class="textarea" rows="3" placeholder="Textarea"></textarea>
-                    </div>
-                    <div>
-                        <ons-select id="choose-sel">
-                            <option value="basic">Alta</option>
-                            <option value="material">Baja</option>
-                        </ons-select>
-                    </div>
-                    <ons-button id="submitSignIn">Guardar</ons-button>
+            <div class="container-page4">
+                <h1>Bienvenido Juan</h1>
+                <div class="container-image3">
+                    <img src="img/task.png" alt="" class="image3">
                 </div>
+                <div class="form-task">
+                    <h2 style="text-align: center; color: white;">Crear Tarea</h2>
+                    <div class="fields" style="color: white;">
+                        <div>
+                            <p>
+                                Fecha <ons-input id="reminder" modifier="underbar" type="date" float></ons-input>
+                            </p>
+                        </div>
+                        
+                        <div class="option" style="color: white;">
+                            Prioridad
+                            <ons-select id="choose-sel" value=>
+                                <option value="basic">Alta</option>
+                                <option value="material">Baja</option>
+                            </ons-select>
+                        </div>
+                    </div>
+                    <div>
+                        <textarea class="textarea" rows="3"  style="width: 100%;" placeholder="Nota"></textarea>
+                    </div>
+                    <div class="form-buttons">
+                        <ons-button class="saveNotes">Guardar</ons-button>
+                        <ons-button class="pushMyNotes">Mis notas</ons-button>
+                    </div>
+                </div>
+            </div>
+        </ons-page>
+    </template>
+
+
+    <template id="page5.html">
+        <ons-page id="page5">
+            <div class="superior">
+                <div class="sup-1"></div>
+                <div class="sup-2"></div>
+            </div>
+            <div class="container-page4">
+                <h1>Mis Notas</h1>
             </div>
         </ons-page>
     </template>
