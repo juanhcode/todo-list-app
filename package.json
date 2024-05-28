@@ -21,7 +21,9 @@
       "browser",
       "android"
     ],
-    "plugins": {}
+    "plugins": {
+      "cordova-plugin-geolocation": {}
+    }
   },
   "dependencies": {
     "onsenui": "^2.12.8"

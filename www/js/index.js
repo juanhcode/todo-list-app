@@ -3,6 +3,23 @@ document.addEventListener('deviceready', onDeviceReady, false);
 function onDeviceReady() {
   console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
   document.getElementById('deviceready').classList.add('ready');
+  console.log("navigator.geolocation works well");
+}
+
+function getGeolocalization() {
+var onSuccess = function(position) {
+  alert('Latitude: '          + position.coords.latitude          + '\n' +
+        'Longitude: '         + position.coords.longitude         + '\n' +
+        'Altitude: '          + position.coords.altitude          + '\n' +
+        'Timestamp: '         + position.timestamp                + '\n');
+};
+
+function onError(error) {
+  alert('code: '    + error.code    + '\n' +
+        'message: ' + error.message + '\n');
+}
+
+navigator.geolocation.getCurrentPosition(onSuccess, onError);
 }
 
 document.addEventListener('init', function (event) {
@@ -95,6 +112,11 @@ document.addEventListener('init', function (event) {
     page.querySelector('.pushMyNotes').onclick = () => {
       document.querySelector('#myNavigator').pushPage('page5.html');
       console.log("IR");
+    }
+
+    page.querySelector('.getLocation').onclick = () => {
+      getGeolocalization();
+      console.log("OBTENIENDO UBICACIÓN");
     }
    }
 });
