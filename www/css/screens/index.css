@@ -85,14 +85,14 @@
     text-transform: none;
 }
 
-.saveNotes{
+.saveNotes {
     padding: 12px;
     font-size: 1.2rem;
     background-color: #244f58;
     text-transform: none;
 }
 
-.pushMyNotes{
+.pushMyNotes {
     padding: 12px;
     font-size: 1.2rem;
     background-color: #244f58;
@@ -124,12 +124,18 @@
 
 /* pagina 4 */
 .container-page4 {
-    margin-top: 68px;
     display: flex;
-    height: 80%;
+    height: 90vh;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: start;
+}
+
+.titlePage4 {
+    margin-top: 10%;
+    display: flex;
+    justify-content: right;
+    width: 95%;
 }
 
 .container-image3 {
@@ -148,7 +154,7 @@
     border: 2px solid black;
     padding: 5%;
     width: 80%;
-    height: 40%;
+    height: 70%;
     background-color: #6a9aa5;
 }
 
@@ -164,7 +170,8 @@
     align-items: center;
     width: 40%;
 }
-.form-buttons{
+
+.form-buttons {
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -172,3 +179,29 @@
 }
 
 /* *************/
+
+/*PAGINA LISTAS */
+.listas {
+    margin-top: 5%;
+    height: 100%;
+    width: 100%;
+}
+
+.buttonAdd {
+    margin-top: 4%;
+    display: flex;
+    justify-content: right;
+    width: 95%;
+
+}
+
+.titlePage5 {
+    margin-top: 10%;
+    display: flex;
+    justify-content: right;
+    width: 95%;
+}
+
+#map {
+    height: 40%;
+}

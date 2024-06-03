@@ -7,6 +7,8 @@
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
     <meta name="color-scheme" content="light dark">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
     <title>Todo List</title>
 </head>
 
@@ -25,7 +27,8 @@
             <div class="container">
                 <h1>Haga las cosas con TODO</h1>
                 <p>
-                    "Todo" es una app versátil que te permite guardar recordatorios, notas, recibir notificaciones y personalizar colores.
+                    "Todo" es una app versátil que te permite guardar recordatorios, notas, recibir notificaciones y
+                    personalizar colores.
                 </p>
                 <ons-button id="push-button">Empezar</ons-button>
             </div>
@@ -40,7 +43,8 @@
             </div>
             <div class="container-page2">
                 <h1>TODO</h1>
-                <p style="text-align: center;">Cada nota es un paso hacia tu meta. Sigue escribiendo, cada palabra cuenta.</p>
+                <p style="text-align: center;">Cada nota es un paso hacia tu meta. Sigue escribiendo, cada palabra
+                    cuenta.</p>
                 <div style="text-align: center; margin-top: 30px;">
                     <p>
                         <ons-input id="username" modifier="underbar" placeholder="Usuario" float></ons-input>
@@ -65,6 +69,9 @@
                 <div class="sup-1"></div>
                 <div class="sup-2"></div>
             </div>
+            <div class="buttonAdd">
+                <ion-icon name="color-palette-outline" style="font-size: 40px;" class="pickColor"></ion-icon>
+            </div>
             <div class="container-page3">
                 <h1>TODO</h1>
                 <img src="img/iniciar.svg" alt="" class="image3">
@@ -74,7 +81,7 @@
                             float></ons-input>
                     </p>
                     <p>
-                        <ons-input id="fieldPassword" modifier="underbar" type="Contraseña" placeholder="Password"
+                        <ons-input id="fieldPassword" modifier="underbar" type="password" placeholder="Contraseña"
                             float></ons-input>
                     </p>
                     <ons-button id="submitSignIn">Inicia Sesión</ons-button>
@@ -90,8 +97,8 @@
                 <div class="sup-1"></div>
                 <div class="sup-2"></div>
             </div>
+            <h1 class="titlePage4">Bienvenido Juan</h1>
             <div class="container-page4">
-                <h1>Bienvenido Juan</h1>
                 <div class="container-image3">
                     <img src="img/task.png" alt="" class="image3">
                 </div>
@@ -103,7 +110,7 @@
                                 Fecha <ons-input id="reminder" modifier="underbar" type="date" float></ons-input>
                             </p>
                         </div>
-                        
+
                         <div class="option" style="color: white;">
                             Prioridad
                             <ons-select id="choose-sel" value=>
@@ -113,8 +120,12 @@
                         </div>
                     </div>
                     <div>
-                        <textarea class="textarea" rows="3"  style="width: 100%;" placeholder="Nota"></textarea>
+
+                        <textarea class="textarea" rows="3" style="width: 100%;" placeholder="Nota"></textarea>
                     </div>
+                    <h3>Ubicación: </h3>
+                    <div id="map"></div>
+
                     <div class="form-buttons">
                         <ons-button class="saveNotes">Guardar</ons-button>
                         <ons-button class="pushMyNotes">Mis notas</ons-button>
@@ -131,8 +142,31 @@
                 <div class="sup-1"></div>
                 <div class="sup-2"></div>
             </div>
-            <div class="container-page4">
+            <div class="titlePage5">
                 <h1>Mis Notas</h1>
+            </div>
+            <div class="buttonAdd">
+                <ons-fab>
+                    <ons-icon icon="md-plus"></ons-icon>
+                </ons-fab>
+            </div>
+            <div class="listas">
+                <!--HOY-->
+                <ons-list>
+                    <ons-list-header class="list-today">Hoy</ons-list-header>
+                </ons-list>
+                <!--Hace 7 dias-->
+                <ons-list>
+                    <ons-list-header class="list-preview7">Hace 7 dias</ons-list-header>
+                </ons-list>
+                <!--Hace 30 dias-->
+                <ons-list>
+                    <ons-list-header class="list-preview30">Hace 30 dias</ons-list-header>
+                </ons-list>
+                <!--Más de un Mes-->
+                <ons-list>
+                    <ons-list-header class="list-month">Más de un mes</ons-list-header>
+                </ons-list>
             </div>
         </ons-page>
     </template>
@@ -142,6 +176,10 @@
     <link rel="stylesheet" href="css/onsen-css-components.min.css">
     <link rel="stylesheet" href="css/screens/index.css">
     <script src="js/onsenui.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>(g => { var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a) })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)) })
+            ({ key: "AIzaSyBNaC5Le8TROOyNcI8m0ywToNIuuktAh7Y", v: "weekly" });</script>
 </body>
 
 </html>
