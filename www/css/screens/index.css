@@ -205,3 +205,13 @@
 #map {
     height: 40%;
 }
+
+.notesList{
+    padding: 1%;
+    margin: 30px 10px;
+    
+}
+
+#reminderUpdate{
+    padding-bottom: 10%;
+}

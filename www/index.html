@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <ons-navigator swipeable id="myNavigator" page="page3.html"></ons-navigator>
+    <ons-navigator swipeable id="myNavigator" page="page1.html"></ons-navigator>
 
     <template id="page1.html">
         <ons-page id="page1">
@@ -115,8 +115,8 @@
                         <div class="option" style="color: white;">
                             Prioridad
                             <ons-select id="choose-sel" value=>
-                                <option value="basic">Alta</option>
-                                <option value="material">Baja</option>
+                                <option value="Alta">Alta</option>
+                                <option value="Baja">Baja</option>
                             </ons-select>
                         </div>
                     </div>
@@ -168,6 +168,36 @@
                 <ons-list>
                     <ons-list-header class="list-month">Más de un mes</ons-list-header>
                 </ons-list>
+            </div>
+        </ons-page>
+    </template>
+
+    <template id="page6.html">
+        <ons-page id="page6">
+            <ons-toolbar>
+                <div class="left"><ons-back-button>Page 1</ons-back-button></div>
+                <div class="center"></div>
+            </ons-toolbar>
+            <div class="notesList">
+                <div>
+                    <p>
+                        Fecha <ons-input id="reminderUpdate" modifier="underbar" type="date" float></ons-input>
+                    </p>
+                </div>
+                <div>
+                    <textarea class="textareaUpdate" rows="10" style="width: 100%;" placeholder="Nota"></textarea>
+                </div>
+                <div class="option" style="color: black;">
+                    Prioridad
+                    <ons-select id="choose-selec" value=>
+                        <option value="Alta">Alta</option>
+                        <option value="Baja">Baja</option>
+                    </ons-select>
+                </div>
+                <div class="form-buttons">
+                    <ons-button class="btnDelete" style="background-color: rgb(184, 51, 51);">Eliminar</ons-button>
+                    <ons-button class="btnEdit">Editar</ons-button>
+                </div>
             </div>
         </ons-page>
     </template>
