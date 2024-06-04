@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <ons-navigator swipeable id="myNavigator" page="page6.html"></ons-navigator>
+    <ons-navigator swipeable id="myNavigator" page="page1.html"></ons-navigator>
 
     <template id="page1.html">
         <ons-page id="page1">
@@ -176,6 +176,27 @@
                 <div class="left"><ons-back-button>Page 1</ons-back-button></div>
                 <div class="center"></div>
             </ons-toolbar>
+            <div class="notesList">
+                <div>
+                    <p>
+                        Fecha <ons-input id="reminderUpdate" modifier="underbar" type="date" float></ons-input>
+                    </p>
+                </div>
+                <div>
+                    <textarea class="textareaUpdate" rows="10" style="width: 100%;" placeholder="Nota"></textarea>
+                </div>
+                <div class="option" style="color: black;">
+                    Prioridad
+                    <ons-select id="choose-selec" value=>
+                        <option value="Alta">Alta</option>
+                        <option value="Baja">Baja</option>
+                    </ons-select>
+                </div>
+                <div class="form-buttons">
+                    <ons-button class="btnDelete" style="background-color: rgb(184, 51, 51);">Eliminar</ons-button>
+                    <ons-button class="btnEdit">Editar</ons-button>
+                </div>
+            </div>
         </ons-page>
     </template>
 
@@ -187,7 +208,7 @@
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script>(g => { var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window; b = b[c] || (b[c] = {}); var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => { await (a = m.createElement("script")); e.set("libraries", [...r] + ""); for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]); e.set("callback", c + ".maps." + q); a.src = `https://maps.${c}apis.com/maps/api/js?` + e; d[q] = f; a.onerror = () => h = n(Error(p + " could not load.")); a.nonce = m.querySelector("script[nonce]")?.nonce || ""; m.head.append(a) })); d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)) })
-            ({ key: "", v: "weekly" });</script>
+            ({ key: "AIzaSyBNaC5Le8TROOyNcI8m0ywToNIuuktAh7Y", v: "weekly" });</script>
 </body>
 
 </html>

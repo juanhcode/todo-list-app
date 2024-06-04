@@ -176,79 +176,132 @@ document.addEventListener('init', function (event) {
 
     })
 
-    page.querySelector('.pushMyNotes').onclick = async () => {
+    page.querySelector('.pushMyNotes').onclick = () => {
       document.querySelector('#myNavigator').pushPage('page5.html');
+    }
+  } else if (page.id === 'page5') {
+    const token = localStorage.getItem('token');
+    const parts = token.split('.');
+    const payloadBase64 = parts[1];
+    const payloadJson = JSON.parse(atob(payloadBase64));
+    const { usuario } = payloadJson;
+    async function getTasks(id) {
+      const url = `https://api-todo-list-ta8f.onrender.com/v1/task/all/${id}`;
       try {
-        const response = await fetch('https://api-todo-list-ta8f.onrender.com/v1/task/all/1', {
+        const response = await fetch(url, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json'
           }
         });
         const data = await response.json();
+        console.log(data);
+        const convertirFecha = (fecha) => {
+          let date = new Date(fecha);
+          let year = date.getUTCFullYear();
+          let month = date.getUTCMonth() + 1;
+          let day = date.getUTCDate();
+          let formattedDate = `${year}-${month}-${day}`;
+          return formattedDate;
+        }
         if (response.status === 200) {
-          const listToday = document.querySelector('.list-today');
+          let listToday = document.querySelector('.list-today');
+          console.log(listToday);
           const fecha = new Date();
           const year = fecha.getFullYear();
           const month = fecha.getMonth() + 1;
           const day = fecha.getDate();
-          const date = `${year}-0${month}-${day}`;
+          const date = `${year}-${month}-${day}`;
           for (let i = 0; i < data.length; i++) {
             const note = data[i];
-            const formatDate = note.reminder.split("T")[0];
+            const formatDate = convertirFecha(note.reminder);
             //HOY
-            if (date == formatDate) {
+            if (date === formatDate) {
               listToday.innerHTML += `<ons-list-item tappable>${note.task_id} | ${note.notes}</ons-list-item>`;
             }
             //HACE 7 DIAS
             if ((diferenciaDias(date, formatDate) <= 7) && (date != formatDate) && (diferenciaDias(date, formatDate) >= 1)) {
-              const listWeek = document.querySelector('.list-preview7');
+              let listWeek = document.querySelector('.list-preview7');
+              console.log(listWeek);
               listWeek.innerHTML += `<ons-list-item tappable>${note.task_id} | ${note.notes}</ons-list-item>`;
             }
             //HACE 30 DIAS
             if ((diferenciaDias(date, formatDate) > 7) && (date != formatDate) && (diferenciaDias(date, formatDate) <= 30)) {
-              const listWeek = document.querySelector('.list-preview30');
+              let listWeek = document.querySelector('.list-preview30');
               listWeek.innerHTML += `<ons-list-item tappable>${note.task_id} | ${note.notes}</ons-list-item>`;
             } else if ((diferenciaDias(date, formatDate) > 30) && (date != formatDate)) {
-              const listWeek = document.querySelector('.list-month');
+              let listWeek = document.querySelector('.list-month');
               listWeek.innerHTML += `<ons-list-item tappable>${note.task_id} | ${note.notes}</ons-list-item>`;
             }
           };
-
-          
-
         }
       } catch (error) {
         ons.notification.alert("Ups! Algo salió mal");
       }
-      const tareas = document.querySelectorAll('.listas .list-item');
-      tareas.forEach(tarea => {
-        tarea.addEventListener('click', async (e) => {
-          let titulo = e.target.innerText;
-          const id = titulo.split("|")[0];
-          try {
-            const response = await fetch(`https://api-todo-list-ta8f.onrender.com/v1/task/${id}`, {
-              method: 'GET',
-              headers: {
-                'Content-Type': 'application/json'
+    }
+    getTasks(usuario.id)
+      .then(() => {
+        const tareas = document.querySelectorAll('.listas .list-item');
+        console.log(tareas);
+        tareas.forEach(tarea => {
+          tarea.addEventListener('click', async (e) => {
+            let titulo = e.target.innerText;
+            const id = titulo.split("|")[0];
+            try {
+              const response = await fetch(`https://api-todo-list-ta8f.onrender.com/v1/task/${id}`, {
+                method: 'GET',
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              });
+              const data = await response.json();
+              if (response.status === 200) {
+                localStorage.setItem('task', JSON.stringify(data));
+                document.querySelector('#myNavigator').pushPage('page6.html');
               }
-            });
-            const data = await response.json();
-            if (response.status === 200) {
-              localStorage.setItem('task', JSON.stringify(data));
               document.querySelector('#myNavigator').pushPage('page6.html');
-            }
-            document.querySelector('#myNavigator').pushPage('page6.html');
             } catch (error) {
               return error;
             }
           });
+        });
       })
-    }
-  } else if (page.id === 'page5') {
+      .catch(error => {
+        // Handle errors (optional)
+      });
     page.querySelector('.buttonAdd').onclick = async () => {
       document.querySelector('#myNavigator').pushPage('page4.html');
     }
+  }
+  else if (page.id === 'page6') {
+    const note = localStorage.getItem('task');
+    const { task_id, reminder, notes, priority, location } = JSON.parse(note);
+    const reminderUpdate = page.querySelector('#reminderUpdate');
+    reminderUpdate.value = reminder.split("T")[0];
+    const textarea = page.querySelector('.textareaUpdate');
+    textarea.value = notes;
+    const option = page.querySelector('#choose-selec');
+    option.value = priority;
+    let btnDelete = page.querySelector('.btnDelete');
+    let btnEdit = page.querySelector('.btnEdit');
+    btnDelete.addEventListener('click', async () => {
+      try {
+        const response = await fetch(`https://api-todo-list-ta8f.onrender.com/v1/task/${task_id}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        if (response.status === 200) {
+          ons.notification.confirm("Tarea eliminada con éxito");
+          localStorage.removeItem('task');
+          document.querySelector('#myNavigator').pushPage('page5.html');
+        }
+      } catch (error) {
+        ons.notification.alert("Ups! Algo salió mal");
+      }
+    });
+
   }
 });
 

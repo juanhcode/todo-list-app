@@ -1,1 +1,1 @@
-{"plugins":["cordova-plugin-globalization","cordova-plugin-device","cordova-plugin-geolocation"]}
+{"plugins":["cordova-plugin-device","cordova-plugin-geolocation","cordova-custom-config"]}
