@@ -1,20 +1,59 @@
 document.addEventListener('deviceready', onDeviceReady, false);
 //AIzaSyBNaC5Le8TROOyNcI8m0ywToNIuuktAh7Y
+let global_database;
 function onDeviceReady() {
   console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
   document.getElementById('deviceready').classList.add('ready');
+
+  global_database = window.sqlitePlugin.openDatabase(
+    {
+      name: "my-db.db",
+      location: 'default',
+      androidDatabaseProvider: 'system',
+      androidLockWorkaround: 1
+    },
+    function (db) {
+      console.log("SQLite Database >> abierta correctamente", db);
+    },
+    function (err) {
+      console.log("Error al abrir base de datos >>", err);
+    });
+
+  // Crear una tabla, si no existe
+  global_database.transaction(function (tx) {
+    tx.executeSql('CREATE TABLE IF NOT EXISTS task (task_id integer primary key, reminder text, notes text, priority text, location text, user_id integer)');
+  }, function (err) {
+    console.error('Transaction ERROR: ' + err.message);
+  }, function (data) {
+    console.log('Base de datos y tabla creada con éxito', data);
+  });
 }
 
 document.addEventListener('init', function (event) {
   let page = event.target;
 
   if (page.id === 'page1') {
+    localStorage.removeItem('color');
+    let colorBGC = page.querySelector('.page__background');
+    let colorPcik = page.querySelector('.pickColor');
+    colorPcik.addEventListener('click', () => {
+      let colorSelection = page.querySelector('#colorSelection');
+      colorSelection.click();
+      colorSelection.addEventListener('change', () => {
+        if (colorSelection.value != "#000000") {
+          localStorage.setItem('color', colorSelection.value);
+          colorBGC.style.backgroundColor = colorSelection.value;
+          colorBGC.style.transition = "background-color 1000ms linear";
+        }
+      });
+    });
     page.querySelector('#push-button').onclick = function () {
       document.querySelector('#myNavigator').pushPage('page2.html',
         { data: { title: 'Page 2', myData: JSON.stringify({ "first": "primer dato" }) } });
     };
   }
   else if (page.id === 'page2') {
+    localStorage.getItem('color') ? page.querySelector('.page__background').style.backgroundColor = localStorage.getItem('color') : '';
     page.querySelector('#submit').onclick = async () => {
       let user_name = page.querySelector('#username').value;
       let password = page.querySelector('#password').value;
@@ -54,18 +93,7 @@ document.addEventListener('init', function (event) {
     }
   }
   else if (page.id === 'page3') {
-    let colorBGC = document.querySelector('.page__background');
-    let colorPcik = page.querySelector('.pickColor');
-    colorPcik.addEventListener('click', () => {
-      let colorSelection = page.querySelector('#colorSelection');
-      colorSelection.click();
-      colorSelection.addEventListener('change', () => {
-        if (colorSelection.value != "#000000") {
-          colorBGC.style.backgroundColor = colorSelection.value;
-          colorBGC.style.transition = "background-color 1000ms linear";
-        }
-      });
-    });
+    localStorage.getItem('color') ? page.querySelector('.page__background').style.backgroundColor = localStorage.getItem('color') : '';
     page.querySelector('#submitSignIn').onclick = async () => {
       let email_address = page.querySelector('#fieldEmail').value;
       let password = page.querySelector('#fieldPassword').value;
@@ -102,6 +130,7 @@ document.addEventListener('init', function (event) {
     }
   }
   else if (page.id === 'page4') {
+    localStorage.getItem('color') ? page.querySelector('.page__background').style.backgroundColor = localStorage.getItem('color') : '';
     navigator.geolocation.getCurrentPosition(function (position) {
       let latitude = position.coords.latitude;
       let longitude = position.coords.longitude;
@@ -172,6 +201,7 @@ document.addEventListener('init', function (event) {
           body: JSON.stringify(note)
         });
         if (response.status === 201) {
+          
           reminder.value = '';
           textarea.value = '';
           ons.notification.confirm("Nota guardada con éxito");
@@ -188,6 +218,7 @@ document.addEventListener('init', function (event) {
       document.querySelector('#myNavigator').pushPage('page5.html');
     }
   } else if (page.id === 'page5') {
+    localStorage.getItem('color') ? page.querySelector('.page__background').style.backgroundColor = localStorage.getItem('color') : '';
     const token = localStorage.getItem('token');
     const parts = token.split('.');
     const payloadBase64 = parts[1];
@@ -282,6 +313,7 @@ document.addEventListener('init', function (event) {
     }
   }
   else if (page.id === 'page6') {
+    localStorage.getItem('color') ? page.querySelector('.page__background').style.backgroundColor = localStorage.getItem('color') : '';
     const note = localStorage.getItem('task');
     const { task_id, reminder, notes, priority, location } = JSON.parse(note);
     const reminderUpdate = page.querySelector('#reminderUpdate');
@@ -309,6 +341,36 @@ document.addEventListener('init', function (event) {
         ons.notification.alert("Ups! Algo salió mal");
       }
     });
+  btnEdit.addEventListener('click', async () => {
+    const token = localStorage.getItem('token');
+    const parts = token.split('.');
+    const payloadBase64 = parts[1];
+    const payloadJson = JSON.parse(atob(payloadBase64));
+    const { usuario } = payloadJson;
+    const note = {
+      "reminder": reminderUpdate.value,
+      "notes": textarea.value,
+      "priority": option.value,
+      "location": '0-0',
+      "user_id": usuario.id,
+    };
+    try {
+      const response = await fetch(`https://api-todo-list-ta8f.onrender.com/v1/task/${task_id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(note)
+      });
+      if (response.status === 200) {
+        ons.notification.confirm("Tarea actualizada con éxito");
+        localStorage.removeItem('task');
+        document.querySelector('#myNavigator').pushPage('page5.html');
+      }
+    } catch (error) {
+      ons.notification.alert("Ups! Algo salió mal");
+    }
+  });
 
   }
 });

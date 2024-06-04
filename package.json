@@ -33,6 +33,7 @@
     }
   },
   "dependencies": {
+    "cordova-sqlite-storage": "^6.1.0",
     "onsenui": "^2.12.8"
   }
 }
