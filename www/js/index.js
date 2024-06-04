@@ -68,9 +68,17 @@ document.addEventListener('init', function (event) {
     }
   }
   else if (page.id === 'page3') {
+    let colorBGC = document.querySelector('.page__background');
     let colorPcik = page.querySelector('.pickColor');
     colorPcik.addEventListener('click', () => {
-      console.log("Holaaa");
+      let colorSelection = page.querySelector('#colorSelection');
+      colorSelection.click();
+      colorSelection.addEventListener('change', () => {
+        if (colorSelection.value != "#000000") {
+          colorBGC.style.backgroundColor = colorSelection.value;
+          colorBGC.style.transition = "background-color 1000ms linear";
+        }
+      });
     });
     page.querySelector('#submitSignIn').onclick = async () => {
       let email_address = page.querySelector('#fieldEmail').value;
